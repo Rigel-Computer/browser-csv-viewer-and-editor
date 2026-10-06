@@ -1,9 +1,15 @@
 # browser-csv-viewer-and-editor
 
+> **⚠️ This repository is no longer maintained.**
+> Development continues in **[browser-csv-excel-viewer-and-editor](https://github.com/Rigel-Computer/browser-csv-excel-viewer-and-editor)**, which adds an Excel viewer (`.xlsx`, `.xls`, `.ods`) with much more precise inconsistency checks, works fully offline and blocks all network access from the page.
+> This final version contains an important security fix (see [Final release](#final-release)). If you use an earlier copy, update or switch to the new repository.
+
+**English** · [Deutsch](README_DE.md)
+
 A lightweight CSV viewer and editor that runs entirely in your browser. No server, no installation, no Excel required.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![HTML](https://img.shields.io/badge/no%20build%20step-just%20open-orange.svg)
+![Status](https://img.shields.io/badge/status-archived-lightgrey.svg)
 
 ---
 
@@ -53,9 +59,23 @@ Simple heuristics spot potential data issues at a glance:
 
 Highlighting can be toggled on/off with the **Inconsistencies** button in the toolbar.
 
+## Security
+
+- **Your data stays in the browser.** Files are read locally and never uploaded. The only network request is loading PapaParse from cdnjs when the page opens.
+- **Crafted files cannot run code.** Headers and cell values are escaped before they are displayed.
+- **Exports contain your data as it is.** If a CSV from someone else contains cells that start with `=`, Excel will treat them as formulas when you open the export, just as it would with the original.
+
+For stricter requirements, use the [new repository](https://github.com/Rigel-Computer/browser-csv-excel-viewer-and-editor): it ships PapaParse locally, works without internet and blocks every network connection from the page.
+
+## Final release
+
+The last commit before archiving fixes a security issue:
+
+- **Fixed: script injection through CSV headers.** Earlier versions inserted column headers into the page without escaping them. A crafted CSV file could therefore run its own script in the viewer and read the loaded data. Headers are now escaped like cell values.
+
 ## Dependencies
 
-- [PapaParse 5.4](https://www.papaparse.com/) — loaded from cdnjs, used for CSV parsing and export
+- [PapaParse 5.4.1](https://www.papaparse.com/) (MIT) — CSV parsing and export, loaded from cdnjs. No known vulnerabilities in this version.
 
 ## Browser Support
 

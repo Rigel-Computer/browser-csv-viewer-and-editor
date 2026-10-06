@@ -1,9 +1,15 @@
 # browser-csv-viewer-and-editor
 
+> **⚠️ Dieses Repository wird nicht mehr gepflegt.**
+> Die Entwicklung geht weiter in **[browser-csv-excel-viewer-and-editor](https://github.com/Rigel-Computer/browser-csv-excel-viewer-and-editor)**, das zusätzlich einen Excel-Viewer (`.xlsx`, `.xls`, `.ods`) mit deutlich genauerer Inkonsistenz-Prüfung bietet, komplett offline läuft und jeden Netzwerkzugriff der Seite sperrt.
+> Diese letzte Version enthält eine wichtige Sicherheitskorrektur (siehe [Letzte Version](#letzte-version)). Wer eine ältere Kopie nutzt, sollte aktualisieren oder zum neuen Repository wechseln.
+
+[English](README.md) · **Deutsch**
+
 Ein schlanker CSV-Viewer und -Editor, der vollständig im Browser läuft. Kein Server, keine Installation, kein Excel erforderlich.
 
 ![Lizenz](https://img.shields.io/badge/lizenz-MIT-blue.svg)
-![HTML](https://img.shields.io/badge/kein%20Build-einfach%20öffnen-orange.svg)
+![Status](https://img.shields.io/badge/status-archiviert-lightgrey.svg)
 
 ---
 
@@ -13,7 +19,7 @@ Ein schlanker CSV-Viewer und -Editor, der vollständig im Browser läuft. Kein S
 - **Spalten sortieren** — Klick auf einen Spaltenkopf sortiert auf- oder absteigend
 - **Live-Suche / Filter** über alle Spalten gleichzeitig
 - **Inkonsistenz-Highlighting** — markiert automatisch:
-  - 🔴 Leere, null, N/A oder leere Zellen
+  - 🔴 Leere Zellen sowie null, N/A oder -
   - 🟡 Textwerte in sonst numerischen Spalten
   - 🟡 Negative Werte in Betrags-/Preis-/Summen-Spalten
   - 🟡 Ungültige Datumsangaben in Datumsspalten
@@ -48,14 +54,28 @@ Einfache Heuristiken zeigen potenzielle Datenfehler auf einen Blick:
 |---|---|
 | 🔴 Rote Zelle | Leerer Wert, `null`, `N/A` oder `-` |
 | 🟡 Gelbe Zelle | Text in einer Spalte, in der >70 % der Werte numerisch sind |
-| 🟡 Gelbe Zelle | Negativer Betrag in einer Spalte namens *amount*, *price*, *total*, *betrag*, *summe*, *preis* o. Ä. |
-| 🟡 Gelbe Zelle | Ungültiger Wert in einer Spalte namens *date*, *datum*, *time*, *created*, *updated* o. Ä. |
+| 🟡 Gelbe Zelle | Negativer Betrag in einer Spalte namens *amount*, *price*, *total*, *cost*, *revenue* oder *sum* |
+| 🟡 Gelbe Zelle | Ungültiger Wert in einer Spalte namens *date*, *time*, *created* oder *updated* |
 
-Das Highlighting lässt sich mit dem Button **Inkonsistenzen** in der Toolbar ein- und ausschalten.
+Die Spaltenerkennung arbeitet nur mit englischen Überschriften. Das Highlighting lässt sich mit dem Button **Inconsistencies** in der Toolbar ein- und ausschalten.
+
+## Sicherheit
+
+- **Die Daten bleiben im Browser.** Dateien werden lokal gelesen und nie hochgeladen. Die einzige Netzwerkanfrage ist das Laden von PapaParse von cdnjs beim Öffnen der Seite.
+- **Präparierte Dateien können keinen Code ausführen.** Überschriften und Zellwerte werden vor der Anzeige maskiert.
+- **Exporte enthalten die Daten, wie sie sind.** Enthält eine fremde CSV Zellen, die mit `=` beginnen, behandelt Excel sie beim Öffnen des Exports als Formel, genau wie beim Original.
+
+Für strengere Anforderungen das [neue Repository](https://github.com/Rigel-Computer/browser-csv-excel-viewer-and-editor) verwenden: Es liefert PapaParse lokal mit, läuft ohne Internet und sperrt jede Netzwerkverbindung der Seite.
+
+## Letzte Version
+
+Der letzte Commit vor der Archivierung behebt eine Sicherheitslücke:
+
+- **Behoben: Skript-Einschleusung über CSV-Überschriften.** Frühere Versionen haben Spaltenüberschriften unmaskiert in die Seite geschrieben. Eine präparierte CSV-Datei konnte dadurch eigenen Code im Viewer ausführen und die geladenen Daten lesen. Überschriften werden jetzt wie Zellwerte maskiert.
 
 ## Abhängigkeiten
 
-- [PapaParse 5.4](https://www.papaparse.com/) — wird von cdnjs geladen, dient zum Parsen und Exportieren von CSV-Dateien
+- [PapaParse 5.4.1](https://www.papaparse.com/) (MIT) — Parsen und Export von CSV, von cdnjs geladen. Keine bekannten Sicherheitslücken in dieser Version.
 
 ## Browser-Unterstützung
 

@@ -140,7 +140,7 @@ function renderTable() {
   headers.forEach((h, i) => {
     const sorted = sortCol === i;
     const icon   = sorted ? (sortDir === 1 ? '▲' : '▼') : '⇅';
-    out += `<th class="${sorted ? 'sorted' : ''}" onclick="sortBy(${i})">${h}<span class="sort-icon">${icon}</span></th>`;
+    out += `<th class="${sorted ? 'sorted' : ''}" onclick="sortBy(${i})">${esc(h)}<span class="sort-icon">${icon}</span></th>`;
   });
   out += '</tr></thead><tbody>';
 
@@ -154,10 +154,7 @@ function renderTable() {
         if (cls === 'empty')   errs++;
         if (cls === 'suspect') warns++;
       }
-      const safe = String(val)
-        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-      out += `<td class="${cls}" contenteditable="true" data-row="${ri}" data-col="${h}" onblur="cellEdit(this)">${safe}</td>`;
+      out += `<td class="${cls}" contenteditable="true" data-row="${ri}" data-col="${esc(h)}" onblur="cellEdit(this)">${esc(val)}</td>`;
     });
     out += '</tr>';
   });
@@ -221,3 +218,10 @@ function resetAll() {
 function show(id) { document.getElementById(id).classList.remove('hidden'); }
 function hide(id) { document.getElementById(id).classList.add('hidden'); }
 function setStatus(msg) { document.getElementById('status').textContent = msg; }
+
+/* Escape text from the CSV (headers and values) before it goes into HTML.
+ * Headers used to be inserted unescaped, which let a crafted CSV run script. */
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
