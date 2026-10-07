@@ -81,6 +81,12 @@ The last commit before archiving fixes a security issue:
 
 Works in all modern browsers (Chrome, Firefox, Safari, Edge). No Internet Explorer support.
 
+## Disclaimer
+
+This code was written in whole or in part with the help of generative AI (Claude by Anthropic). It was tested with automated browser tests, including deliberately crafted files, but it has not been independently audited.
+
+The software is provided "as is", without warranty of any kind (see [LICENSE](LICENSE)). **Use it at your own risk.** Keep a backup of every file before you edit and export it. The inconsistency checks are heuristics: they help find problems, but they can miss some and flag correct data. They do not replace a proper review of your accounts.
+
 ## License
 
-MIT — do whatever you want with it.
+[MIT](LICENSE): you may use, copy, modify and distribute this code, also commercially, as long as the copyright notice and the license text stay with every copy. There is no warranty.

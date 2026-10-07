@@ -81,6 +81,12 @@ Der letzte Commit vor der Archivierung behebt eine Sicherheitslücke:
 
 Funktioniert in allen modernen Browsern (Chrome, Firefox, Safari, Edge). Internet Explorer wird nicht unterstützt.
 
+## Haftungsausschluss
+
+Dieser Code wurde ganz oder teilweise mithilfe generativer KI (Claude von Anthropic) erstellt. Er wurde mit automatisierten Browser-Tests geprüft, auch mit absichtlich präparierten Dateien, aber nicht unabhängig begutachtet.
+
+Die Software wird ohne jede Gewährleistung bereitgestellt (siehe [LICENSE](LICENSE)). **Die Nutzung erfolgt auf eigene Gefahr.** Vor dem Bearbeiten und Exportieren bitte immer eine Sicherungskopie der Datei anlegen. Die Inkonsistenz-Prüfung arbeitet mit Heuristiken: Sie hilft, Fehler zu finden, kann aber welche übersehen und korrekte Daten markieren. Sie ersetzt keine sorgfältige Prüfung der Buchhaltung.
+
 ## Lizenz
 
-MIT — mach damit, was du willst.
+[MIT](LICENSE): Der Code darf genutzt, kopiert, verändert und weitergegeben werden, auch kommerziell, solange der Copyright-Vermerk und der Lizenztext jeder Kopie beiliegen. Es gibt keine Gewährleistung.
